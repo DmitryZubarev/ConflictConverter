@@ -18,7 +18,7 @@ namespace ConflictConverter.Domain.Entities
 
         public ConflictDictionary(IDeviceInfoArray deviceInfoArray)
         {
-            Dictionary<IBrigade, List<IDevice>> conflictDictionary = new Dictionary<IBrigade, List<IDevice>>();
+            ConflictDict = new Dictionary<IBrigade, List<IDevice>>();
 
             foreach (IDeviceInfo deviceInfo in deviceInfoArray.Data)
             {
@@ -28,8 +28,6 @@ namespace ConflictConverter.Domain.Entities
                 //добавление девайса в словарь
                 this.AddDevice(brigade, device);
             }
-
-            ConflictDict = conflictDictionary;
         }
 
         public string ToFormattedString()
