@@ -15,7 +15,6 @@ namespace ConflictConverter.Domain.Services
         public IConflict[] Convert(IDeviceInfoArray deviceInfoArray)
         {
             ConflictDictionary conflictDictionary = new ConflictDictionary(deviceInfoArray);
-
             conflictDictionary.ClearByLength(2);
             conflictDictionary.DeleteWithoutOnline();
 

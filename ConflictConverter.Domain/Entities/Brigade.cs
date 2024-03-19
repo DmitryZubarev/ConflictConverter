@@ -48,7 +48,7 @@ namespace ConflictConverter.Domain.Entities
 
         public override bool Equals(object? obj)
         {
-            IBrigade secondBrigade = obj as IBrigade;
+            IBrigade secondBrigade = obj as Brigade;
             if (secondBrigade == null) return false;
 
             if (secondBrigade.Code == this.Code) return true;

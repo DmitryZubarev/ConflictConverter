@@ -9,16 +9,16 @@ namespace ConflictConverter.Domain.Entities
 {
     public class ConflictDictionary : IData
     {
-        public Dictionary<IBrigade, List<IDevice>> ConflictDict { get; set; }
+        public Dictionary<string, List<IDevice>> ConflictDict { get; set; }
 
-        public ConflictDictionary(Dictionary<IBrigade, List<IDevice>> conflictDict) 
+        public ConflictDictionary(Dictionary<string, List<IDevice>> conflictDict) 
         {
             ConflictDict = conflictDict;
         }
 
         public ConflictDictionary(IDeviceInfoArray deviceInfoArray)
         {
-            ConflictDict = new Dictionary<IBrigade, List<IDevice>>();
+            ConflictDict = new Dictionary<string, List<IDevice>>();
 
             foreach (IDeviceInfo deviceInfo in deviceInfoArray.Data)
             {
@@ -35,7 +35,7 @@ namespace ConflictConverter.Domain.Entities
             string answer = "[ \n";
             foreach (var conflict in ConflictDict)
             {
-                answer += $"Brigade: {conflict.Key.Code}, \n";
+                answer += $"Brigade: {conflict.Key}, \n";
                 answer += "Device: { ";
                 foreach (var device in conflict.Value)
                 {
@@ -51,14 +51,14 @@ namespace ConflictConverter.Domain.Entities
 
         public void AddDevice(IBrigade brigade, IDevice device)
         {
-            if (ConflictDict.ContainsKey(brigade))
+            if (ConflictDict.ContainsKey(brigade.Code))
             {
-                ConflictDict[brigade].Add(device);
+                ConflictDict[brigade.Code].Add(device);
             }
             else
             {
-                ConflictDict.Add(brigade, new List<IDevice>());
-                ConflictDict[brigade].Add(device);
+                ConflictDict.Add(brigade.Code, new List<IDevice>());
+                ConflictDict[brigade.Code].Add(device);
             }
         }
 
@@ -91,7 +91,7 @@ namespace ConflictConverter.Domain.Entities
             int i = 0;
             foreach (var pair in ConflictDict)
             {
-                Conflict conflict = new Conflict(pair.Key, pair.Value.ToArray());
+                Conflict conflict = new Conflict(new Brigade(pair.Key), pair.Value.ToArray());
                 conflicts[i] = conflict;
                 i++;
             }
