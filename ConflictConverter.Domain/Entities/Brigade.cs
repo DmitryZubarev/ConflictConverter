@@ -36,9 +36,23 @@ namespace ConflictConverter.Domain.Entities
             Code = schema.Code;
         }
 
+        public Brigade(string code)
+        {
+            Code = code;
+        }
+
         public string ToFormattedString()
         {
             return $"Code - {Code} \n";
+        }
+
+        public override bool Equals(object? obj)
+        {
+            IBrigade secondBrigade = obj as IBrigade;
+            if (secondBrigade == null) return false;
+
+            if (secondBrigade.Code == this.Code) return true;
+            else return false;
         }
     }
 }

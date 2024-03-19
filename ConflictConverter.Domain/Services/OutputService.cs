@@ -18,13 +18,14 @@ namespace ConflictConverter.Domain.Services
             _jsonWriter = new LocalJsonWriter();
         }
 
-        public void OutputData(IConflict[] conflicts, TypesToWriteEnum typeToWrite)
+        public IWriter GetWriter(TypesToWriteEnum typeToWrite)
         {
             switch(typeToWrite)
             {
                 case TypesToWriteEnum.ToLocalJson:
-                    _jsonWriter.OutputData(conflicts);
-                    break;
+                    return _jsonWriter;
+                default:
+                    return null;
             }
         }
     }

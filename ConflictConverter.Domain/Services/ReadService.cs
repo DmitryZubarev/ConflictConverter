@@ -19,13 +19,12 @@ namespace ConflictConverter.Domain.Services
             _jsonReader = new LocalJsonReader();
         }
 
-        public IDeviceInfoArray ReadData(TypesToReadEnum typeToRead)
+        public IReader GetReader(TypesToReadEnum typeToRead)
         {
             switch (typeToRead)
             {
                 case TypesToReadEnum.FromLocalJson:
-                    IDeviceInfoArray data = _jsonReader.Read();
-                    return data;
+                    return _jsonReader;
 
                 default:
                     return null;

@@ -44,6 +44,12 @@ namespace ConflictConverter.Domain.Entities
             }
         }
 
+        public DeviceInfo(IDevice device, IBrigade brigade)
+        {
+            Device = device;
+            Brigade = brigade;
+        }
+
         public DeviceInfo(DeviceInfoSchema? schema)
         {
             Device = new Device(schema.Device);

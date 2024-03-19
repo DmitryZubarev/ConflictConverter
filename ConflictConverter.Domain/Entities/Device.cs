@@ -50,9 +50,23 @@ namespace ConflictConverter.Domain.Entities
             IsOnline = (bool)schema.IsOnline;
         }
 
+        public Device(string serialNumber, bool isOnline)
+        {
+            SerialNumber = serialNumber;
+            IsOnline = isOnline;
+        }
+
         public string ToFormattedString()
         {
             return $"SerialNumber - {SerialNumber}, IsOnline - {IsOnline} \n";
+        }
+
+        public override bool Equals(object? obj)
+        {
+            IDevice device = obj as IDevice;
+
+            if (device != null && device.SerialNumber == SerialNumber) return true;
+            else return false;
         }
     }
 }

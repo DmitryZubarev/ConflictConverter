@@ -8,7 +8,7 @@ namespace ConflictConverter.Domain.Abstractions
 {
     public interface IConflict : IData
     {
-        string? BrigadeCode { get; }
-        string[]? DevicesSerials {  get; }
+        IBrigade Brigade { get; }
+        IDevice[] Devices {  get; }
     }
 }

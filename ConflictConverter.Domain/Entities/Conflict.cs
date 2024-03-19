@@ -9,21 +9,21 @@ namespace ConflictConverter.Domain.Entities
 {
     public class Conflict : IConflict
     {
-        public string BrigadeCode { get; init; }
-        public string[] DevicesSerials { get; init; }
+        public IBrigade Brigade { get; init; }
+        public IDevice[] Devices { get; init; }
 
-        public Conflict(string brigadeCode, string[] devicesSerials)
+        public Conflict(IBrigade brigade, IDevice[] devices)
         {
-            BrigadeCode = brigadeCode;
-            DevicesSerials = devicesSerials;
+            Brigade = brigade;
+            Devices = devices;
         }
 
         public string ToFormattedString()
         {
-            string answer = $"brigadeCode : {BrigadeCode}; \n [ \n";
-            foreach (var device in DevicesSerials)
+            string answer = $"brigade : {Brigade.ToFormattedString()}; \n [ \n";
+            foreach (var device in Devices)
             {
-                answer += $"{device}, \n";
+                answer += $"{device.ToFormattedString}, \n";
             }
             answer += "]";
 

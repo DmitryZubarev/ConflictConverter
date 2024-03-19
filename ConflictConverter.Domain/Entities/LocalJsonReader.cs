@@ -13,10 +13,24 @@ namespace ConflictConverter.Domain.Entities
     {
         public LocalJsonReader() { }
 
+        private string GetPath() //Получение путя к файлу
+        {
+            string filePath = "";
+            bool check = false;
+
+            while (!check)
+            {
+                Console.WriteLine("Введите путь к .json файлу:");
+                filePath = Console.ReadLine();
+                check = File.Exists(filePath);
+            }
+
+            return filePath;
+        }
+
         public IDeviceInfoArray Read()
         {
-            Console.WriteLine("Введите путь к .json файлу:");
-            string filePath = Console.ReadLine();
+            string filePath = GetPath();
             string json = File.ReadAllText(filePath);
 
             IDeviceInfoArray deviceInfoArray = new DeviceInfoArray(Newtonsoft.Json.JsonConvert.DeserializeObject<DeviceInfoSchema[]>(json));

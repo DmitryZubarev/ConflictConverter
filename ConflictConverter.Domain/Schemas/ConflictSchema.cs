@@ -18,8 +18,8 @@ namespace ConflictConverter.Domain.Schemas
 
         public ConflictSchema(IConflict conflict)
         {
-            BrigadeCode = conflict.BrigadeCode;
-            DevicesSerials = conflict.DevicesSerials;
+            BrigadeCode = conflict.Brigade.Code;
+            DevicesSerials = conflict.Devices.Select(x => x.SerialNumber).ToArray();
         }
     }
 }
